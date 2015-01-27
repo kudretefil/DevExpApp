@@ -1,0 +1,22 @@
+﻿@{
+    Html.DevExpress().GridView<DXWebApplication1.Database.BILDIRIM>(settings =>
+    {
+        settings.Name = "Home page grid (Yener)";
+        settings.KeyFieldName = "BILDIRIM_ID";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "partial" };
+        settings.KeyFields(k => k.BILDIRIM_ID);
+        settings.Columns.Add("FK_COB_TESIS_ID");
+        settings.Columns.Add("TARIH");
+        settings.Columns.Add("FK_KATEGORI");
+        settings.Columns.Add("MADDE_METIN");
+
+    }).BindToEF("", "", (s, e) =>
+    {
+        e.KeyExpression = "BILDIRIM_ID";
+        e.QueryableSource = Model;
+    }).GetHtml();
+    
+    
+
+
+}

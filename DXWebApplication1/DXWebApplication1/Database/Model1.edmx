@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SEVESOIIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BILDIRIM">
+          <Key>
+            <PropertyRef Name="BILDIRIM_ID" />
+          </Key>
+          <Property Name="BILDIRIM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_COB_TESIS_ID" Type="int" Nullable="false" />
+          <Property Name="TARIH" Type="datetime" Nullable="false" />
+          <Property Name="FK_KATEGORI" Type="int" Nullable="false" />
+          <Property Name="MADDE_METIN" Type="nvarchar(max)" />
+          <Property Name="YENI_FORMAT" Type="bit" Nullable="false" />
+          <Property Name="GONDERILDI" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BILDIRIM_KIMYASALLARI">
+          <Key>
+            <PropertyRef Name="BILDIRIM_KIMYASAL_ID" />
+          </Key>
+          <Property Name="BILDIRIM_KIMYASAL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_KIMYASAL_ID" Type="int" Nullable="false" />
+          <Property Name="FK_BILDIRIM_ID" Type="int" Nullable="false" />
+          <Property Name="ADLANDIRILMIS_INDEKSI_ALT" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ADLANDIRILMIS_INDEKSI_UST" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TOKSISITE_INDEKSI_ALT" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TOKSISITE_INDEKSI_UST" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ALEVLENIRLIK_INDEKSI_ALT" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ALEVLENIRLIK_INDEKSI_UST" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="EKOTOKSISITE_INDEKSI_ALT" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="EKOTOKSISITE_INDEKSI_UST" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="MIKTAR" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="KONSANTRASYON" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="MUSTAHZAR_NOTLARI" Type="nvarchar(max)" />
+          <Property Name="KARISIM_BILGILERI" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Master" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CharacterLevel" Type="int" />
+          <Property Name="ClassCharType" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Characters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CharName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KIMYASAL">
+          <Key>
+            <PropertyRef Name="KIMYASAL_ID" />
+          </Key>
+          <Property Name="KIMYASAL_ID" Type="int" Nullable="false" />
+          <Property Name="FK_KIMYASAL_TIPI" Type="int" />
+          <Property Name="LISTE_NO" Type="nvarchar" MaxLength="500" />
+          <Property Name="INGILIZCE_ADI" Type="nvarchar" MaxLength="2000" />
+          <Property Name="TURKCE_ADI" Type="nvarchar" MaxLength="2000" />
+          <Property Name="MADDE_NOTLARI" Type="nvarchar(max)" />
+          <Property Name="EC_NO" Type="nvarchar" MaxLength="500" />
+          <Property Name="CAS_NO" Type="nvarchar" MaxLength="500" />
+          <Property Name="FK_ADLANDIRILMIS_MADDE_KATEGORI" Type="int" />
+          <Property Name="KONSANTRASYON_SINIRLARI" Type="nvarchar(max)" />
+          <Property Name="TCDD_TUR" Type="nvarchar" MaxLength="200" />
+          <Property Name="TCDD_ESIK_DEGER" Type="float" />
+          <Property Name="MUSTAHZAR_NOTLARI" Type="nvarchar(max)" />
+          <Property Name="KARISIM_BILGILERI" Type="nvarchar(max)" />
+          <Property Name="UNADR_SINIF" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RISK_BILGILERI">
+          <Key>
+            <PropertyRef Name="RISK_BILGILERI_ID" />
+          </Key>
+          <Property Name="RISK_BILGILERI_ID" Type="int" Nullable="false" />
+          <Property Name="RISK_IBARESI" Type="nvarchar" MaxLength="100" />
+          <Property Name="ACIKLAMA" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SANAYICI">
+          <Key>
+            <PropertyRef Name="COB_TESIS_ID" />
+          </Key>
+          <Property Name="COB_TESIS_ID" Type="int" Nullable="false" />
+          <Property Name="FAALIYET_ALANI" Type="nvarchar(max)" />
+          <Property Name="CEVRE_BILGI" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SINIFLANDIRMA">
+          <Key>
+            <PropertyRef Name="SINIFLANDIRMA_ID" />
+          </Key>
+          <Property Name="SINIFLANDIRMA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FORMUL" Type="nchar" MaxLength="50" />
+          <Property Name="BILGI" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="BILDIRIMKIMYASALLARI_BILDIRIM">
+          <End Role="BILDIRIM" Type="Self.BILDIRIM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BILDIRIM_KIMYASALLARI" Type="Self.BILDIRIM_KIMYASALLARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILDIRIM">
+              <PropertyRef Name="BILDIRIM_ID" />
+            </Principal>
+            <Dependent Role="BILDIRIM_KIMYASALLARI">
+              <PropertyRef Name="FK_BILDIRIM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BILDIRIMKIMYASALLARI_KIMYASAL">
+          <End Role="KIMYASAL" Type="Self.KIMYASAL" Multiplicity="1" />
+          <End Role="BILDIRIM_KIMYASALLARI" Type="Self.BILDIRIM_KIMYASALLARI" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KIMYASAL">
+              <PropertyRef Name="KIMYASAL_ID" />
+            </Principal>
+            <Dependent Role="BILDIRIM_KIMYASALLARI">
+              <PropertyRef Name="BILDIRIM_KIMYASAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SEVESOIIModelStoreContainer">
+          <EntitySet Name="BILDIRIM" EntityType="Self.BILDIRIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BILDIRIM_KIMYASALLARI" EntityType="Self.BILDIRIM_KIMYASALLARI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KIMYASAL" EntityType="Self.KIMYASAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RISK_BILGILERI" EntityType="Self.RISK_BILGILERI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANAYICI" EntityType="Self.SANAYICI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SINIFLANDIRMA" EntityType="Self.SINIFLANDIRMA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="BILDIRIMKIMYASALLARI_BILDIRIM" Association="Self.BILDIRIMKIMYASALLARI_BILDIRIM">
+            <End Role="BILDIRIM" EntitySet="BILDIRIM" />
+            <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
+          </AssociationSet>
+          <AssociationSet Name="BILDIRIMKIMYASALLARI_KIMYASAL" Association="Self.BILDIRIMKIMYASALLARI_KIMYASAL">
+            <End Role="KIMYASAL" EntitySet="KIMYASAL" />
+            <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SEVESOIIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BILDIRIM">
+          <Key>
+            <PropertyRef Name="BILDIRIM_ID" />
+          </Key>
+          <Property Name="BILDIRIM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_COB_TESIS_ID" Type="Int32" Nullable="false" />
+          <Property Name="TARIH" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_KATEGORI" Type="Int32" Nullable="false" />
+          <Property Name="MADDE_METIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YENI_FORMAT" Type="Boolean" Nullable="false" />
+          <Property Name="GONDERILDI" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BILDIRIM_KIMYASALLARI" Relationship="Self.BILDIRIMKIMYASALLARI_BILDIRIM" FromRole="BILDIRIM" ToRole="BILDIRIM_KIMYASALLARI" />
+        </EntityType>
+        <EntityType Name="BILDIRIM_KIMYASALLARI">
+          <Key>
+            <PropertyRef Name="BILDIRIM_KIMYASAL_ID" />
+          </Key>
+          <Property Name="BILDIRIM_KIMYASAL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_KIMYASAL_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_BILDIRIM_ID" Type="Int32" Nullable="false" />
+          <Property Name="ADLANDIRILMIS_INDEKSI_ALT" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ADLANDIRILMIS_INDEKSI_UST" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TOKSISITE_INDEKSI_ALT" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TOKSISITE_INDEKSI_UST" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ALEVLENIRLIK_INDEKSI_ALT" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ALEVLENIRLIK_INDEKSI_UST" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="EKOTOKSISITE_INDEKSI_ALT" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="EKOTOKSISITE_INDEKSI_UST" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="MIKTAR" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="KONSANTRASYON" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="MUSTAHZAR_NOTLARI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KARISIM_BILGILERI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BILDIRIM" Relationship="Self.BILDIRIMKIMYASALLARI_BILDIRIM" FromRole="BILDIRIM_KIMYASALLARI" ToRole="BILDIRIM" />
+          <NavigationProperty Name="KIMYASAL" Relationship="Self.BILDIRIMKIMYASALLARI_KIMYASAL" FromRole="BILDIRIM_KIMYASALLARI" ToRole="KIMYASAL" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Master" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CharacterLevel" Type="Int32" />
+          <Property Name="ClassCharType" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Characters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CharName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="KIMYASAL">
+          <Key>
+            <PropertyRef Name="KIMYASAL_ID" />
+          </Key>
+          <Property Name="KIMYASAL_ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_KIMYASAL_TIPI" Type="Int32" />
+          <Property Name="LISTE_NO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="INGILIZCE_ADI" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="TURKCE_ADI" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="MADDE_NOTLARI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EC_NO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CAS_NO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FK_ADLANDIRILMIS_MADDE_KATEGORI" Type="Int32" />
+          <Property Name="KONSANTRASYON_SINIRLARI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TCDD_TUR" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TCDD_ESIK_DEGER" Type="Double" />
+          <Property Name="MUSTAHZAR_NOTLARI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KARISIM_BILGILERI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UNADR_SINIF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BILDIRIM_KIMYASALLARI" Relationship="Self.BILDIRIMKIMYASALLARI_KIMYASAL" FromRole="KIMYASAL" ToRole="BILDIRIM_KIMYASALLARI" />
+        </EntityType>
+        <EntityType Name="RISK_BILGILERI">
+          <Key>
+            <PropertyRef Name="RISK_BILGILERI_ID" />
+          </Key>
+          <Property Name="RISK_BILGILERI_ID" Type="Int32" Nullable="false" />
+          <Property Name="RISK_IBARESI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SANAYICI">
+          <Key>
+            <PropertyRef Name="COB_TESIS_ID" />
+          </Key>
+          <Property Name="COB_TESIS_ID" Type="Int32" Nullable="false" />
+          <Property Name="FAALIYET_ALANI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CEVRE_BILGI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SINIFLANDIRMA">
+          <Key>
+            <PropertyRef Name="SINIFLANDIRMA_ID" />
+          </Key>
+          <Property Name="SINIFLANDIRMA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FORMUL" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="BILGI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="BILDIRIMKIMYASALLARI_BILDIRIM">
+          <End Role="BILDIRIM" Type="Self.BILDIRIM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BILDIRIM_KIMYASALLARI" Type="Self.BILDIRIM_KIMYASALLARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILDIRIM">
+              <PropertyRef Name="BILDIRIM_ID" />
+            </Principal>
+            <Dependent Role="BILDIRIM_KIMYASALLARI">
+              <PropertyRef Name="FK_BILDIRIM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BILDIRIMKIMYASALLARI_KIMYASAL">
+          <End Role="KIMYASAL" Type="Self.KIMYASAL" Multiplicity="1" />
+          <End Role="BILDIRIM_KIMYASALLARI" Type="Self.BILDIRIM_KIMYASALLARI" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KIMYASAL">
+              <PropertyRef Name="KIMYASAL_ID" />
+            </Principal>
+            <Dependent Role="BILDIRIM_KIMYASALLARI">
+              <PropertyRef Name="BILDIRIM_KIMYASAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SEVESOIIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BILDIRIM" EntityType="Self.BILDIRIM" />
+          <EntitySet Name="BILDIRIM_KIMYASALLARI" EntityType="Self.BILDIRIM_KIMYASALLARI" />
+          <EntitySet Name="Character" EntityType="Self.Character" />
+          <EntitySet Name="Characters" EntityType="Self.Characters" />
+          <EntitySet Name="KIMYASAL" EntityType="Self.KIMYASAL" />
+          <EntitySet Name="RISK_BILGILERI" EntityType="Self.RISK_BILGILERI" />
+          <EntitySet Name="SANAYICI" EntityType="Self.SANAYICI" />
+          <EntitySet Name="SINIFLANDIRMA" EntityType="Self.SINIFLANDIRMA" />
+          <AssociationSet Name="BILDIRIMKIMYASALLARI_BILDIRIM" Association="Self.BILDIRIMKIMYASALLARI_BILDIRIM">
+            <End Role="BILDIRIM" EntitySet="BILDIRIM" />
+            <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
+          </AssociationSet>
+          <AssociationSet Name="BILDIRIMKIMYASALLARI_KIMYASAL" Association="Self.BILDIRIMKIMYASALLARI_KIMYASAL">
+            <End Role="KIMYASAL" EntitySet="KIMYASAL" />
+            <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SEVESOIIModelStoreContainer" CdmEntityContainer="SEVESOIIEntities">
+          <EntitySetMapping Name="BILDIRIM">
+            <EntityTypeMapping TypeName="SEVESOIIModel.BILDIRIM">
+              <MappingFragment StoreEntitySet="BILDIRIM">
+                <ScalarProperty Name="BILDIRIM_ID" ColumnName="BILDIRIM_ID" />
+                <ScalarProperty Name="FK_COB_TESIS_ID" ColumnName="FK_COB_TESIS_ID" />
+                <ScalarProperty Name="TARIH" ColumnName="TARIH" />
+                <ScalarProperty Name="FK_KATEGORI" ColumnName="FK_KATEGORI" />
+                <ScalarProperty Name="MADDE_METIN" ColumnName="MADDE_METIN" />
+                <ScalarProperty Name="YENI_FORMAT" ColumnName="YENI_FORMAT" />
+                <ScalarProperty Name="GONDERILDI" ColumnName="GONDERILDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILDIRIM_KIMYASALLARI">
+            <EntityTypeMapping TypeName="SEVESOIIModel.BILDIRIM_KIMYASALLARI">
+              <MappingFragment StoreEntitySet="BILDIRIM_KIMYASALLARI">
+                <ScalarProperty Name="BILDIRIM_KIMYASAL_ID" ColumnName="BILDIRIM_KIMYASAL_ID" />
+                <ScalarProperty Name="FK_KIMYASAL_ID" ColumnName="FK_KIMYASAL_ID" />
+                <ScalarProperty Name="FK_BILDIRIM_ID" ColumnName="FK_BILDIRIM_ID" />
+                <ScalarProperty Name="ADLANDIRILMIS_INDEKSI_ALT" ColumnName="ADLANDIRILMIS_INDEKSI_ALT" />
+                <ScalarProperty Name="ADLANDIRILMIS_INDEKSI_UST" ColumnName="ADLANDIRILMIS_INDEKSI_UST" />
+                <ScalarProperty Name="TOKSISITE_INDEKSI_ALT" ColumnName="TOKSISITE_INDEKSI_ALT" />
+                <ScalarProperty Name="TOKSISITE_INDEKSI_UST" ColumnName="TOKSISITE_INDEKSI_UST" />
+                <ScalarProperty Name="ALEVLENIRLIK_INDEKSI_ALT" ColumnName="ALEVLENIRLIK_INDEKSI_ALT" />
+                <ScalarProperty Name="ALEVLENIRLIK_INDEKSI_UST" ColumnName="ALEVLENIRLIK_INDEKSI_UST" />
+                <ScalarProperty Name="EKOTOKSISITE_INDEKSI_ALT" ColumnName="EKOTOKSISITE_INDEKSI_ALT" />
+                <ScalarProperty Name="EKOTOKSISITE_INDEKSI_UST" ColumnName="EKOTOKSISITE_INDEKSI_UST" />
+                <ScalarProperty Name="MIKTAR" ColumnName="MIKTAR" />
+                <ScalarProperty Name="KONSANTRASYON" ColumnName="KONSANTRASYON" />
+                <ScalarProperty Name="MUSTAHZAR_NOTLARI" ColumnName="MUSTAHZAR_NOTLARI" />
+                <ScalarProperty Name="KARISIM_BILGILERI" ColumnName="KARISIM_BILGILERI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Character">
+            <EntityTypeMapping TypeName="SEVESOIIModel.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Master" ColumnName="Master" />
+                <ScalarProperty Name="CharacterLevel" ColumnName="CharacterLevel" />
+                <ScalarProperty Name="ClassCharType" ColumnName="ClassCharType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characters">
+            <EntityTypeMapping TypeName="SEVESOIIModel.Characters">
+              <MappingFragment StoreEntitySet="Characters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CharName" ColumnName="CharName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KIMYASAL">
+            <EntityTypeMapping TypeName="SEVESOIIModel.KIMYASAL">
+              <MappingFragment StoreEntitySet="KIMYASAL">
+                <ScalarProperty Name="KIMYASAL_ID" ColumnName="KIMYASAL_ID" />
+                <ScalarProperty Name="FK_KIMYASAL_TIPI" ColumnName="FK_KIMYASAL_TIPI" />
+                <ScalarProperty Name="LISTE_NO" ColumnName="LISTE_NO" />
+                <ScalarProperty Name="INGILIZCE_ADI" ColumnName="INGILIZCE_ADI" />
+                <ScalarProperty Name="TURKCE_ADI" ColumnName="TURKCE_ADI" />
+                <ScalarProperty Name="MADDE_NOTLARI" ColumnName="MADDE_NOTLARI" />
+                <ScalarProperty Name="EC_NO" ColumnName="EC_NO" />
+                <ScalarProperty Name="CAS_NO" ColumnName="CAS_NO" />
+                <ScalarProperty Name="FK_ADLANDIRILMIS_MADDE_KATEGORI" ColumnName="FK_ADLANDIRILMIS_MADDE_KATEGORI" />
+                <ScalarProperty Name="KONSANTRASYON_SINIRLARI" ColumnName="KONSANTRASYON_SINIRLARI" />
+                <ScalarProperty Name="TCDD_TUR" ColumnName="TCDD_TUR" />
+                <ScalarProperty Name="TCDD_ESIK_DEGER" ColumnName="TCDD_ESIK_DEGER" />
+                <ScalarProperty Name="MUSTAHZAR_NOTLARI" ColumnName="MUSTAHZAR_NOTLARI" />
+                <ScalarProperty Name="KARISIM_BILGILERI" ColumnName="KARISIM_BILGILERI" />
+                <ScalarProperty Name="UNADR_SINIF" ColumnName="UNADR_SINIF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RISK_BILGILERI">
+            <EntityTypeMapping TypeName="SEVESOIIModel.RISK_BILGILERI">
+              <MappingFragment StoreEntitySet="RISK_BILGILERI">
+                <ScalarProperty Name="RISK_BILGILERI_ID" ColumnName="RISK_BILGILERI_ID" />
+                <ScalarProperty Name="RISK_IBARESI" ColumnName="RISK_IBARESI" />
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANAYICI">
+            <EntityTypeMapping TypeName="SEVESOIIModel.SANAYICI">
+              <MappingFragment StoreEntitySet="SANAYICI">
+                <ScalarProperty Name="COB_TESIS_ID" ColumnName="COB_TESIS_ID" />
+                <ScalarProperty Name="FAALIYET_ALANI" ColumnName="FAALIYET_ALANI" />
+                <ScalarProperty Name="CEVRE_BILGI" ColumnName="CEVRE_BILGI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SINIFLANDIRMA">
+            <EntityTypeMapping TypeName="SEVESOIIModel.SINIFLANDIRMA">
+              <MappingFragment StoreEntitySet="SINIFLANDIRMA">
+                <ScalarProperty Name="SINIFLANDIRMA_ID" ColumnName="SINIFLANDIRMA_ID" />
+                <ScalarProperty Name="FORMUL" ColumnName="FORMUL" />
+                <ScalarProperty Name="BILGI" ColumnName="BILGI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
