@@ -19,7 +19,7 @@ namespace DXWebApplication1.Controllers
         [HttpPost]
         public ActionResult Login(UserModel credentials)
         {
-            if(credentials.username=="yener")
+            if(true)
             {
                 AuthenticationManager.SetAuthCookie(credentials);
                 return View("../Home/Maps");
