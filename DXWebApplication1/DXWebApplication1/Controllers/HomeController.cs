@@ -7,7 +7,7 @@ using DXWebApplication1.Database;
 
 namespace DXWebApplication1.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         SEVESOIIEntities context = new SEVESOIIEntities();
@@ -29,5 +29,6 @@ namespace DXWebApplication1.Controllers
         {
             return View();
         }
+       
     }
 }
