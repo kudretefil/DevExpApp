@@ -1104,6 +1104,13 @@
     <Content Include="Content\assets\scss\mixins.css" />
     <Content Include="Content\assets\scss\responsive.css" />
     <Content Include="Content\assets\scss\style.css" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_bars.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_cafetaria.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_food.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_hospital.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_hotel.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_restaurant.png" />
+    <Content Include="Content\Images\GoogleApiImages\Icons\icon_supermarket.png" />
     <Content Include="Content\Images\GoogleApiImages\powered-by-google-on-non-white.png" />
     <Content Include="Content\Images\GoogleApiImages\powered-by-google-on-white.png" />
     <Content Include="Content\jquery-ui.css" />
@@ -1298,6 +1305,7 @@
     <Content Include="Views\Home\partial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Maps.cshtml" />
+    <Content Include="Views\Home\MapTrain.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

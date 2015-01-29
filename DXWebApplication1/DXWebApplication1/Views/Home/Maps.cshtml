@@ -15,8 +15,35 @@
     var autocomplete;
     var input;
     var types;
+    var currentLocation;
+    var mapOptions;
+    var markerIcons = {
+        restaurant: {
+            icon: "icon_restaurant.png"
+        },
+        bar: {
+            icon: "icon_bars.png"
+        },
+        cafe: {
+            icon: "icon_cafetaria.png"
+        },
+        food: {
+            icon: "icon_food.png"
+        },
+        otel: {
+            icon: "icon_hotel.png"
+        },
+        hospital: {
+            icon: "icon_hospital.png"
+        },
+        grocery_or_supermarket: {
+            icon: "icon_supermarket.png"
+        }
+    }
+    
     function initialize() {
-        var mapOptions = {
+        debugger
+        mapOptions = {
             center: new google.maps.LatLng(-33.8688, 151.2195),
             zoom: 13
         };
@@ -30,7 +57,6 @@
         autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.bindTo('bounds', map);
 
-
         infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
             map: map,
@@ -39,6 +65,7 @@
 
 
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            debugger
             infowindow.close();
             marker.setVisible(false);
             var place = autocomplete.getPlace();
@@ -92,7 +119,6 @@
     }
 
     function callback(results, status) {
-        debugger
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
                 createMarker(results[i]);
@@ -104,7 +130,8 @@
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
             map: map,
-            position: place.geometry.location
+            position: place.geometry.location,
+            icon: "../Content/Images/GoogleApiImages/Icons/" + markerIcons[$("#source").val()].icon
         });
 
         google.maps.event.addListener(marker, 'click', function () {
@@ -112,11 +139,10 @@
             infowindow.open(map, this);
 
         });
-        debugger
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            debugger
             infowindow.close();
             marker.setVisible(false);
+            debugger
             var place = autocomplete.getPlace();
             if (!place.geometry) {
                 return;
@@ -157,14 +183,17 @@
     function doit() {
         infowindow.close();
         debugger
+        if (autocomplete.getPlace() != undefined)
+            currentLocation = autocomplete.getPlace().geometry.location;
+
         var request = {
-            location: autocomplete.getPlace().geometry.location,
-            radius: 500,
-            types: ['restaurant']
+            location: currentLocation,
+            radius: 5000,
+            types: [$("#source").val()]
         };
-        var mapOptions = {
-            center: autocomplete.getPlace().geometry.location,
-            zoom: 13
+        mapOptions = {
+            center: currentLocation,
+            zoom: 16
         };
         map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
@@ -180,43 +209,7 @@
 
     google.maps.event.addDomListener(window, 'load', initialize);
 
-    function search() {
-        infowindow.close();
-        marker.setVisible(false);
-        var place = autocomplete.getPlace();
-        if (!place.geometry) {
-            return;
-        }
 
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-        }
-        marker.setIcon(({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-        }));
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-
-        var address = '';
-        if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-        }
-
-        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-        infowindow.open(map, marker);
-    }
 
 </script>
 <input id="pac-input" class="controls" type="text"
@@ -235,14 +228,39 @@
     <label for="changetype-geocode">Geocodes</label>
 </div>
 <div id="map-canvas" style="height:400px"></div>
-<table>
-    <tr>
-        <td><button type="button" onclick="doit()">Search</button></td>
-        <td><select>
-                <option value="Kizilay, Ankara, Turkey">Kizilay</option>
-                <option value="Çankaya, Tunalı Hilmi Caddesi, Ankara, Turkey">Tunalı</option>
-                <option></option></select></td>
-    </tr>
-</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <div class="tools"> <a class="collapse" href="javascript:;"></a> <a class="config" data-toggle="modal" href="#grid-config"></a> <a class="reload" href="javascript:;"></a> <a class="remove" href="javascript:;"></a> </div>
+            </div>
+            <div class="grid-body no-border">
+                <div class="row">
+                    <div class="col-md-12">
+                        <select id="source" style="width:100%">
+                            <optgroup label="Aranacak Yer">
+                                <option value="restaurant">Retaurant</option>
+                                <option value="bar">Bar</option>
+                                <option value="cafe">Cafe</option>
+                                <option value="establishment">İş Yerleri</option>
+                                <option value="otel">Otel</option>
+                                <option value="hospital">Hastane</option>
+                                <option value="food">Food</option>
+                                <option value="grocery_or_supermarket">Alışveriş Merkezleri</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-body no-border">
+        <a data-color="rgb(255, 255, 255)" onclick="doit()" data-color-format="hex" id="cp4" class="btn btn-primary my-colorpicker-control" href="#" data-colorpicker-guid="8">Search On Map</a> <br>
+        <br>
+        <div class="clearfix"></div>
+    </div>
+    
+</div>
 
 

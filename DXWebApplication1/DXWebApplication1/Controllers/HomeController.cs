@@ -29,6 +29,9 @@ namespace DXWebApplication1.Controllers
         {
             return View();
         }
-       
+        public ActionResult MapTrain()
+        {
+            return View();
+        }
     }
 }
