@@ -1,3 +1,4 @@
+using DXWebApplication1.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,11 @@ namespace DXWebApplication1
             AreaRegistration.RegisterAllAreas();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            //log4net.Config.XmlConfigurator.Configure();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AuthConfig.RegisterAuth();
-            
             ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
-
             DevExpress.Web.ASPxWebControl.CallbackError += Application_Error;
         }
 
@@ -31,6 +31,7 @@ namespace DXWebApplication1
         {
             Exception exception = System.Web.HttpContext.Current.Server.GetLastError();
             //TODO: Handle Exception
+            EntityContext.Logger.Info(exception.Message);//Hata loglanýr
         }
     }
 }

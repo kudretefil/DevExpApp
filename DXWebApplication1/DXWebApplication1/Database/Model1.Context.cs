@@ -12,6 +12,8 @@ namespace DXWebApplication1.Database
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SEVESOIIEntities : DbContext
     {
@@ -28,10 +30,48 @@ namespace DXWebApplication1.Database
         public virtual DbSet<BILDIRIM> BILDIRIM { get; set; }
         public virtual DbSet<BILDIRIM_KIMYASALLARI> BILDIRIM_KIMYASALLARI { get; set; }
         public virtual DbSet<Character> Character { get; set; }
-        public virtual DbSet<Characters> Characters { get; set; }
         public virtual DbSet<KIMYASAL> KIMYASAL { get; set; }
         public virtual DbSet<RISK_BILGILERI> RISK_BILGILERI { get; set; }
         public virtual DbSet<SANAYICI> SANAYICI { get; set; }
         public virtual DbSet<SINIFLANDIRMA> SINIFLANDIRMA { get; set; }
+    
+        public virtual int spGetNotificationByKategory(Nullable<int> kategori, string madde_not, ObjectParameter bildirim_sayisi)
+        {
+            var kategoriParameter = kategori.HasValue ?
+                new ObjectParameter("Kategori", kategori) :
+                new ObjectParameter("Kategori", typeof(int));
+    
+            var madde_notParameter = madde_not != null ?
+                new ObjectParameter("madde_not", madde_not) :
+                new ObjectParameter("madde_not", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spGetNotificationByKategory", kategoriParameter, madde_notParameter, bildirim_sayisi);
+        }
+    
+        public virtual int spGetNotificationByKategoryAndOutput(Nullable<int> kategori, string madde_not, ObjectParameter bildirim_sayisi)
+        {
+            var kategoriParameter = kategori.HasValue ?
+                new ObjectParameter("Kategori", kategori) :
+                new ObjectParameter("Kategori", typeof(int));
+    
+            var madde_notParameter = madde_not != null ?
+                new ObjectParameter("madde_not", madde_not) :
+                new ObjectParameter("madde_not", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spGetNotificationByKategoryAndOutput", kategoriParameter, madde_notParameter, bildirim_sayisi);
+        }
+    
+        public virtual int UpdateBildirimById(Nullable<int> bildirimid, Nullable<int> kategori)
+        {
+            var bildirimidParameter = bildirimid.HasValue ?
+                new ObjectParameter("bildirimid", bildirimid) :
+                new ObjectParameter("bildirimid", typeof(int));
+    
+            var kategoriParameter = kategori.HasValue ?
+                new ObjectParameter("kategori", kategori) :
+                new ObjectParameter("kategori", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBildirimById", bildirimidParameter, kategoriParameter);
+        }
     }
 }

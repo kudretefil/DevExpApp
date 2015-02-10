@@ -99,6 +99,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -1283,6 +1286,9 @@
     <Content Include="Content\assets\scss\themes\elegant\var.scss" />
     <Content Include="Content\assets\scss\themes\simple\theme.scss" />
     <Content Include="Content\assets\scss\themes\simple\var.scss" />
+    <Content Include="Log4Net.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Views\Web.config" />
@@ -1329,9 +1335,6 @@
     <Compile Include="Database\Character.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Characters.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\KIMYASAL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1362,8 +1365,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AppConfig.cs" />
     <Compile Include="Infrastructure\AuthenticationManager.cs" />
+    <Compile Include="Infrastructure\Caching\BaseCache.cs" />
+    <Compile Include="Infrastructure\Caching\BildirimCache.cs" />
+    <Compile Include="Infrastructure\Caching\ICache.cs" />
+    <Compile Include="Infrastructure\Caching\LocalCacheProvider.cs" />
     <Compile Include="Infrastructure\EntityContext.cs" />
+    <Compile Include="Infrastructure\EntityErrorAttribute.cs" />
+    <Compile Include="Infrastructure\EntityException\EntityBusinessException.cs" />
+    <Compile Include="Infrastructure\Log4NetManager.cs" />
+    <Compile Include="Infrastructure\SystemConst.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

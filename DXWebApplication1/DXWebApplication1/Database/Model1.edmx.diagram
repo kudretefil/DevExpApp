@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="SEVESOIIModel.BILDIRIM" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SEVESOIIModel.BILDIRIM_KIMYASALLARI" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SEVESOIIModel.Character" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEVESOIIModel.Characters" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SEVESOIIModel.KIMYASAL" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SEVESOIIModel.RISK_BILGILERI" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SEVESOIIModel.SANAYICI" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />

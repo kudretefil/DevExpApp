@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEVESOIIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEVESOIIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BILDIRIM">
           <Key>
             <PropertyRef Name="BILDIRIM_ID" />
@@ -46,13 +46,6 @@
           <Property Name="Master" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="CharacterLevel" Type="int" />
           <Property Name="ClassCharType" Type="nchar" MaxLength="1" />
-        </EntityType>
-        <EntityType Name="Characters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="CharName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="KIMYASAL">
           <Key>
@@ -124,11 +117,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spGetNotificationByKategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Kategori" Type="int" Mode="In" />
+          <Parameter Name="madde_not" Type="varchar" Mode="In" />
+          <Parameter Name="Bildirim_sayisi" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spGetNotificationByKategoryAndOutput" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Kategori" Type="int" Mode="In" />
+          <Parameter Name="madde_not" Type="varchar" Mode="In" />
+          <Parameter Name="Bildirim_sayisi" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="UpdateBildirimById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="bildirimid" Type="int" Mode="In" />
+          <Parameter Name="kategori" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SEVESOIIModelStoreContainer">
           <EntitySet Name="BILDIRIM" EntityType="Self.BILDIRIM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILDIRIM_KIMYASALLARI" EntityType="Self.BILDIRIM_KIMYASALLARI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KIMYASAL" EntityType="Self.KIMYASAL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RISK_BILGILERI" EntityType="Self.RISK_BILGILERI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SANAYICI" EntityType="Self.SANAYICI" Schema="dbo" store:Type="Tables" />
@@ -142,8 +148,7 @@
             <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEVESOIIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -191,13 +196,6 @@
           <Property Name="Master" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="CharacterLevel" Type="Int32" />
           <Property Name="ClassCharType" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Characters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="CharName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="KIMYASAL">
           <Key>
@@ -274,7 +272,6 @@
           <EntitySet Name="BILDIRIM" EntityType="Self.BILDIRIM" />
           <EntitySet Name="BILDIRIM_KIMYASALLARI" EntityType="Self.BILDIRIM_KIMYASALLARI" />
           <EntitySet Name="Character" EntityType="Self.Character" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" />
           <EntitySet Name="KIMYASAL" EntityType="Self.KIMYASAL" />
           <EntitySet Name="RISK_BILGILERI" EntityType="Self.RISK_BILGILERI" />
           <EntitySet Name="SANAYICI" EntityType="Self.SANAYICI" />
@@ -287,6 +284,20 @@
             <End Role="KIMYASAL" EntitySet="KIMYASAL" />
             <End Role="BILDIRIM_KIMYASALLARI" EntitySet="BILDIRIM_KIMYASALLARI" />
           </AssociationSet>
+          <FunctionImport Name="spGetNotificationByKategory">
+            <Parameter Name="Kategori" Mode="In" Type="Int32" />
+            <Parameter Name="madde_not" Mode="In" Type="String" />
+            <Parameter Name="Bildirim_sayisi" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetNotificationByKategoryAndOutput">
+            <Parameter Name="Kategori" Mode="In" Type="Int32" />
+            <Parameter Name="madde_not" Mode="In" Type="String" />
+            <Parameter Name="Bildirim_sayisi" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateBildirimById">
+            <Parameter Name="bildirimid" Mode="In" Type="Int32" />
+            <Parameter Name="kategori" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -305,6 +316,14 @@
                 <ScalarProperty Name="YENI_FORMAT" ColumnName="YENI_FORMAT" />
                 <ScalarProperty Name="GONDERILDI" ColumnName="GONDERILDI" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SEVESOIIModel.BILDIRIM">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="SEVESOIIModel.Store.UpdateBildirimById" >
+                  <ScalarProperty Name="FK_KATEGORI" ParameterName="kategori" Version="Current" />
+                  <ScalarProperty Name="BILDIRIM_ID" ParameterName="bildirimid" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILDIRIM_KIMYASALLARI">
@@ -336,14 +355,6 @@
                 <ScalarProperty Name="Master" ColumnName="Master" />
                 <ScalarProperty Name="CharacterLevel" ColumnName="CharacterLevel" />
                 <ScalarProperty Name="ClassCharType" ColumnName="ClassCharType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Characters">
-            <EntityTypeMapping TypeName="SEVESOIIModel.Characters">
-              <MappingFragment StoreEntitySet="Characters">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CharName" ColumnName="CharName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -395,6 +406,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetNotificationByKategory" FunctionName="SEVESOIIModel.Store.spGetNotificationByKategory" />
+          <FunctionImportMapping FunctionImportName="spGetNotificationByKategoryAndOutput" FunctionName="SEVESOIIModel.Store.spGetNotificationByKategoryAndOutput" />
+          <FunctionImportMapping FunctionImportName="UpdateBildirimById" FunctionName="SEVESOIIModel.Store.UpdateBildirimById" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
